@@ -28,8 +28,12 @@ public class MainActivity extends ActivityGroup {
 		mButtonMark = (ImageButton) findViewById(R.id.home_bt_mark);
 		mButtonLike.setOnClickListener(MyClickListener);
 		mButtonMark.setOnClickListener(MyClickListener);
-		
+
 		switchPages(R.id.home_bt_like);
+		
+		
+		String data = getResources().getString(R.string.app_name);
+		data = String.format(data, "yf");
 	}
 	
 	public void addView(String id, Class<?> clazz) {
