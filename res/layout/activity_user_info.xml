@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@drawable/user_info_background">
+        android:background="@drawable/user_info_bg">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"

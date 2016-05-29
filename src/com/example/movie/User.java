@@ -1,4 +1,4 @@
-package com.example.yy.movie;
+package com.example.movie;
 
 /**
  * Created by yy on 2016/5/28.

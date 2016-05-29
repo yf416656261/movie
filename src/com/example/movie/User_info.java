@@ -1,9 +1,9 @@
-package com.example.yy.movie;
+package com.example.movie;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class User_info extends AppCompatActivity {
+public class User_info extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
