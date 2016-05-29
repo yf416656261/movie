@@ -34,9 +34,11 @@
             android:id="@+id/tableLayout">
             <TableRow>
                 <TextView
+                    
                     android:text="User:"
                     android:textSize="20dip"/>
                 <EditText
+                    android:id="@+id/account"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -47,6 +49,7 @@
                     android:text="Password:"
                     android:textSize="20dip"/>
                 <EditText
+                    android:id="@+id/password"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />
@@ -61,11 +64,13 @@
             android:id="@+id/linearLayout">
 
             <Button
+                android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
                 android:textAllCaps="false"/>
             <Button
+                android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"

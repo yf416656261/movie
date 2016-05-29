@@ -2,6 +2,7 @@ package com.example.movie;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.example.movie.Login;
 
 public class User_info extends Activity {
 

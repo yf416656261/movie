@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.movie.ContentActivity;
+import com.example.movie.Login;
+import com.example.movie.Movie;
 import com.example.movie.R;
 
 import android.app.Activity;
@@ -26,42 +28,6 @@ import android.os.Bundle;
 
 public class FirstActivity extends Activity {
 	
-	public class Movie {
-		private String title;
-		private String comment;
-		private int ID;
-		private int imageID;
-		public Movie(String title, String comment, int ID, int imageID) {
-			this.title = title;
-			this.comment = comment;
-			this.ID = ID;
-			this.imageID = imageID;
-		}
-		public void setName(String title) {
-			this.title = title;
-		}
-		public void setComment(String comment) {
-			this.comment = comment;
-		}
-		public void setID(int ID) {
-			this.ID = ID;
-		}
-		public void setImageID(int imageID) {
-			this.imageID = imageID;
-		}
-		public String getTitle() {
-			return this.title;
-		}
-		public String getComment() {
-			return this.comment;
-		}
-		public int getID() {
-			return this.ID;
-		}
-		public int getImageID() {
-			return this.imageID;
-		}
-	}
 	
 	private List<Movie> movieList = new ArrayList<Movie>();
 	private ListView l;
@@ -72,7 +38,7 @@ public class FirstActivity extends Activity {
 		setContentView(R.layout.activity_first);
 		
 		l = (ListView)findViewById(R.id.home_lv_forum);
-		mAdapter = new movieAdapter(this, null);
+		mAdapter = new movieAdapter(this, Login.movie_list);
 		//l.setAdapter(mAdapter);
 	}
 	

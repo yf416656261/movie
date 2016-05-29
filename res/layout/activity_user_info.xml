@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
+
     <FrameLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@drawable/user_info_bg">
+        android:layout_height="148dp"
+        android:background="@drawable/user_info_bg"
+        android:orientation="vertical" android:layout_weight="0.34">
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -183,13 +185,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="20dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="15dip"
         android:layout_marginRight="15dip"
         android:layout_marginTop="16dip"
+        android:background="@drawable/more_item_press"
         android:gravity="center_vertical|center_horizontal"
         android:text="点击修改资料"
-        android:textSize="15sp"
-        android:background="@drawable/more_item_press"
-        android:layout_gravity="center"></Button>
+        android:textSize="15sp" >
+</Button>
 
 </LinearLayout>
