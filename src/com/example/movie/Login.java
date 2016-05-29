@@ -23,11 +23,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.movie.home.FirstActivity;
+
 public class Login extends Activity {
 
 	public static User user = new User();
 	public static ArrayList<Movie> movie_list = new ArrayList<Movie>();
-	final static String URL = "http://115.28.70.78";
+	public final static String URL = "http://115.28.70.78";
 	HttpURLConnection connection = null;
 	DataOutputStream out;
 	InputStream in;
@@ -142,7 +144,6 @@ public class Login extends Activity {
     private void LoadAllMovies() {
     	movie_list.clear();
     	final String url = URL + "/querymovies";
-    	
     	new Thread(new Runnable() {
 
 			@Override
@@ -157,7 +158,7 @@ public class Login extends Activity {
 					
 					out  = new DataOutputStream(connection.getOutputStream());
 					//out.writeBytes("mobileCode="+ phone_number.getText().toString() + "&userID=");
-					out.writeBytes("getallposts");
+					out.writeBytes("getAllMovies");
 					
 					in = connection.getInputStream();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -167,7 +168,7 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					Parse_Movies(result);
+					Parse_Movies(result, 0);
 					
 					
 					Intent intent = new Intent(Login.this, MainTabsActivity.class);
@@ -186,7 +187,7 @@ public class Login extends Activity {
     	}).start();
     }
     
-    private void Parse_Movies(String xml) {
+    public static void Parse_Movies(String xml, int type) {
     	String title = "", comment = "";
 		int ID = 0, I_ID = 0;
     	try {
@@ -214,7 +215,11 @@ public class Login extends Activity {
 					}
 					if (parser.getName().equals("I_ID")) {
 						I_ID = Integer.parseInt(parser.nextText());
-						movie_list.add(new Movie(title, comment, ID, I_ID));
+						if (type == 0) {
+							movie_list.add(new Movie(title, comment, ID, I_ID));
+						} else {
+							FirstActivity.search_list.add(new Movie(title, comment, ID, I_ID));
+						}
 					}
 				case XmlPullParser.END_TAG:
 					if (parser.getName().equals("movies")) {

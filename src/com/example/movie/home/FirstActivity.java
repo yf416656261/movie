@@ -11,10 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +41,81 @@ public class FirstActivity extends Activity {
 	private List<Movie> movieList = new ArrayList<Movie>();
 	private ListView l;
 	private movieAdapter mAdapter;
+	
+	public static List<Movie> search_list = null;
+	
+	EditText s_in = (EditText)findViewById(R.id.search_in);
+	Button search = (Button)findViewById(R.id.search);
+	HttpURLConnection connection = null;
+	DataOutputStream out;
+	InputStream in;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first);
 		
+		search.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				search_list = null;
+				String str_search = s_in.getText().toString();
+				final String url = Login.URL + "/search";
+				final String query = "name=" + str_search;
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String result = "";
+						try {
+							connection = (HttpURLConnection)((new URL(url).openConnection()));
+							connection.setRequestMethod("POST");
+							connection.setConnectTimeout(40000);
+							connection.setReadTimeout(40000);
+							
+							out = new DataOutputStream(connection.getOutputStream());
+							out.writeBytes(query);
+							
+							in = connection.getInputStream();
+							BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+							StringBuilder response = new StringBuilder();
+							String line;
+							while ((line = reader.readLine()) != null) {
+								response.append(line);
+							}
+							result = response.toString();
+							if (result.equals("")) {
+								Toast.makeText(FirstActivity.this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
+							} else {
+								search_list = new ArrayList<Movie>();
+								Login.Parse_Movies(result, 1);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							result = "";
+						} finally {
+							if (connection != null) {
+								connection.disconnect();
+							}
+						}
+					}
+					
+				}).start();
+			}
+			
+		});
+		
+		
 		l = (ListView)findViewById(R.id.home_lv_forum);
-		mAdapter = new movieAdapter(this, Login.movie_list);
-		//l.setAdapter(mAdapter);
+		if (search_list == null) {
+			mAdapter = new movieAdapter(this, Login.movie_list);
+		} else {
+			mAdapter = new movieAdapter(this, search_list);
+		}
+		l.setAdapter(mAdapter);
 	}
 	
 	public class movieAdapter extends BaseAdapter {
@@ -91,6 +167,7 @@ public class FirstActivity extends Activity {
 			}
 			mListView.title.setText((String)movieList.get(position).getTitle());
 			mListView.content.setText((String)movieList.get(position).getComment());
+			mListView.imageID.setImageResource(R.drawable.face);
 			//∂ØÃ¨Õº∆¨µ˜”√
 			l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
