@@ -41,7 +41,7 @@ public class MainTabsActivity extends TabActivity implements
 	
 	private void initIntents() {
 		mHomeIntent = new Intent(this, MainActivity.class);
-		mPersonIntent = new Intent(this, AssActivity.class);
+		mPersonIntent = new Intent(this, User_info.class);
 	}
 	
 	private void initTips() {

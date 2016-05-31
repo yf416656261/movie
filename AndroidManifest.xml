@@ -38,10 +38,6 @@
             android:label="@string/title_activity_main_tabs" >
         </activity>
         <activity
-            android:name=".AssActivity"
-            android:label="@string/title_activity_ass" >
-        </activity>
-        <activity
             android:name=".ContentActivity"
             android:label="@string/title_activity_content" >
         </activity>

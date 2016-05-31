@@ -24,31 +24,20 @@
             android:id="@+id/tableLayout">
             <TableRow>
                 <TextView
-                    android:text="User:"
+                    android:text="Nickname:"
                     android:textSize="20dip"/>
                 <EditText
-                    android:id="@+id/id"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:hint="Input your account here "/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Password:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/name_register"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Nickname:"
+                    android:text="Password:"
                     android:textSize="20dip"/>
                 <EditText
-                    android:id="@+id/name"
+                    android:id="@+id/password_register"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />
@@ -58,7 +47,7 @@
                     android:text="Sex:"
                     android:textSize="20dip"/>
                 <EditText
-                    android:id="@+id/sex"
+                    android:id="@+id/sex_register"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -69,7 +58,7 @@
                     android:text="Phone:"
                     android:textSize="20dip"/>
                 <EditText
-                    android:id="@+id/phone"
+                    android:id="@+id/phone_register"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />
@@ -89,7 +78,7 @@
                     android:text="Address:"
                     android:textSize="20dip"/>
                 <EditText
-                    android:id="@+id/address"
+                    android:id="@+id/address_register"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />

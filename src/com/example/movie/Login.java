@@ -27,7 +27,7 @@ import com.example.movie.home.FirstActivity;
 
 public class Login extends Activity {
 
-	public static User user = new User();
+	public static User user = null;
 	public static ArrayList<Movie> movie_list = new ArrayList<Movie>();
 	public final static String URL = "http://115.28.70.78";
 	HttpURLConnection connection = null;
@@ -78,6 +78,7 @@ public class Login extends Activity {
 							if (result.equals("")) {
 								Toast.makeText(Login.this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
 							} else {
+								user = new User();
 								Parse_User(result);
 								LoadAllMovies();
 							}
@@ -117,9 +118,6 @@ public class Login extends Activity {
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				switch (eventType) {
 				case XmlPullParser.START_TAG:
-					if (parser.getName().equals("ID")) {
-						user.setId(Integer.parseInt(parser.nextText()));
-					}
 					if (parser.getName().equals("PASSWORD")) {
 						user.setPassword(parser.nextText());
 					}
