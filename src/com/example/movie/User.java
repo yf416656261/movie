@@ -6,7 +6,7 @@ import java.lang.String;
  * Created by yy on 2016/5/28.
  */
 public class User {
-    private String id;
+    private int id;
     private String password;
     private String name;
     private int picture_id = 1;
@@ -33,7 +33,7 @@ public class User {
     public void setEmail_address(String a){email_address = a;}
     public void setAddress(String a){address = a;}
 
-    public String getId() {return id;}
+    public int getId() {return id;}
     public int getPicture_id() {return picture_id;}
     public String getPassword() {return password;}
     public String getName() {return name;}

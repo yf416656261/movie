@@ -44,8 +44,8 @@ public class FirstActivity extends Activity {
 	
 	public static List<Movie> search_list = null;
 	
-	EditText s_in = (EditText)findViewById(R.id.search_in);
-	Button search = (Button)findViewById(R.id.search);
+	EditText s_in;
+	Button search;
 	HttpURLConnection connection = null;
 	DataOutputStream out;
 	InputStream in;
@@ -54,6 +54,9 @@ public class FirstActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first);
+		
+		s_in = (EditText)findViewById(R.id.search_in);
+		search = (Button)findViewById(R.id.search);
 		
 		search.setOnClickListener(new View.OnClickListener() {
 

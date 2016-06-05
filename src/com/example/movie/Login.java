@@ -29,19 +29,20 @@ public class Login extends Activity {
 
 	public static User user = null;
 	public static ArrayList<Movie> movie_list = new ArrayList<Movie>();
-	public final static String URL = "http://115.28.70.78";
+	public final static String URL = "http://115.28.70.78/film";
 	HttpURLConnection connection = null;
 	DataOutputStream out;
 	InputStream in;
-	EditText acc = (EditText)findViewById(R.id.account);
-	EditText pw = (EditText)findViewById(R.id.password);
-	Button login = (Button)findViewById(R.id.login_button);
-	Button register = (Button)findViewById(R.id.register_button);
+	EditText acc, pw;
+	Button login, register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+        acc = (EditText)findViewById(R.id.account_login);
+        pw = (EditText)findViewById(R.id.password_login);
+        login = (Button)findViewById(R.id.login_button);
+        register = (Button)findViewById(R.id.register_button);
         login.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -67,6 +68,7 @@ public class Login extends Activity {
 							out = new DataOutputStream(connection.getOutputStream());
 							out.writeBytes(query);
 							
+							
 							in = connection.getInputStream();
 							BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 							StringBuilder response = new StringBuilder();
@@ -75,12 +77,14 @@ public class Login extends Activity {
 								response.append(line);
 							}
 							result = response.toString();
+							Log.w("cccc", "00000");
 							if (result.equals("")) {
 								Toast.makeText(Login.this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
 							} else {
 								user = new User();
+								Log.w("lll", result);
 								Parse_User(result);
-								LoadAllMovies();
+								//LoadAllMovies();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -93,6 +97,10 @@ public class Login extends Activity {
 					}
 					
 				}).start();
+				
+				Intent intent = new Intent(Login.this, MainTabsActivity.class);
+				startActivity(intent);
+				finish();
 			}
         	
         });
@@ -123,6 +131,18 @@ public class Login extends Activity {
 					}
 					if (parser.getName().equals("NAME")) {
 						user.setName(parser.nextText());
+					}
+					if (parser.getName().equals("SEX")) {
+						user.setSex(parser.nextText());
+					}
+					if (parser.getName().equals("PHONE")) {
+						user.setPhone(parser.nextText());
+					}
+					if (parser.getName().equals("E_ADD")) {
+						user.setEmail_address(parser.nextText());
+					}
+					if (parser.getName().equals("ADD")) {
+						user.setAddress(parser.nextText());
 					}
 					if (parser.getName().equals("P_ID")) {
 						user.setPicture_id(Integer.parseInt(parser.nextText()));

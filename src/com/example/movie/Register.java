@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,13 +22,16 @@ import android.widget.Toast;
 
 public class Register extends Activity {
 
-	EditText pw = (EditText)findViewById(R.id.password_register);
-	EditText name = (EditText)findViewById(R.id.name_register);
-	EditText sex = (EditText)findViewById(R.id.sex_register);
-	EditText phone = (EditText)findViewById(R.id.phone_register);
-	EditText e_add = (EditText)findViewById(R.id.email_address);
-	EditText add = (EditText)findViewById(R.id.address_register);
-	Button rg = (Button)findViewById(R.id.register_button);
+	EditText pw;
+	EditText name;
+	EditText sex;
+	EditText phone;
+	EditText e_add;
+	EditText add;
+	Button rg;
+	
+	private Handler handler;
+	private Message msg;
 	
 	
 	HttpURLConnection connection = null;
@@ -36,6 +44,16 @@ public class Register extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         
+        pw = (EditText)findViewById(R.id.password_register);
+        name = (EditText)findViewById(R.id.name_register);
+        sex = (EditText)findViewById(R.id.sex_register);
+        phone = (EditText)findViewById(R.id.phone_register);
+        e_add = (EditText)findViewById(R.id.email_address);
+        add = (EditText)findViewById(R.id.address_register);
+        rg = (Button)findViewById(R.id.register_button);
+        
+        handler = new MsgHandler(Register.this);
+        
         rg.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -45,7 +63,6 @@ public class Register extends Activity {
 				String password = pw.getText().toString();
 				final String url = Login.URL + "/register";
 				final String query = "account=" + acc + "&password=" + password + "&sex=" + sex.getText().toString() + "&phone=" + phone.getText().toString() + "&e_add=" + e_add.getText().toString() + "&add=" + add.getText().toString(); 
-				
 				new Thread(new Runnable() {
 
 					@Override
@@ -69,12 +86,19 @@ public class Register extends Activity {
 								response.append(line);
 							}
 							result = response.toString();
+							Log.w("cccc", result);
 							if (result.equals("")) {
-								Toast.makeText(Register.this, "此用户名已存在", Toast.LENGTH_SHORT).show();
+								msg = handler.obtainMessage();
+								msg.arg1 = 1;
+								handler.sendMessage(msg);
 							} else {
-								Toast.makeText(Register.this, "注册成功！", Toast.LENGTH_SHORT).show();
-								Login.user = new User(name.getText().toString(), pw.getText().toString(), sex.getText().toString(), phone.getText().toString(), e_add.getText().toString(), add.getText().toString());
-								Intent intent = new Intent(Register.this, MainTabsActivity.class);
+							    Login.user = new User(name.getText().toString(), pw.getText().toString(), sex.getText().toString(), phone.getText().toString(), e_add.getText().toString(), add.getText().toString());
+								
+							    msg = handler.obtainMessage();
+								msg.arg1 = 2;
+								handler.sendMessage(msg);
+								
+							    Intent intent = new Intent(Register.this, MainTabsActivity.class);
 								startActivity(intent);
 								finish();
 							}
@@ -89,8 +113,31 @@ public class Register extends Activity {
 					}
 					
 				}).start();
-				
 			}
 		});
+    }
+    
+    public class MsgHandler extends Handler {
+    	private Activity activity;
+    	public MsgHandler(Activity act) {
+    	     activity = new WeakReference<Activity>(act).get();
+    	}
+    	@Override
+    	public void handleMessage(Message msg) {
+    		switch (msg.arg1) {
+    		case 1:
+    			showInfo("此用户名已存在");
+    			break;
+    		case 2:
+    			showInfo("注册成功！");
+    			break;
+    		default:
+    			break;
+    		}
+    		super.handleMessage(msg);
+    	}
+    	public void showInfo(String info) {
+        	Toast.makeText(activity.getApplicationContext(), info, Toast.LENGTH_SHORT).show();
+        }
     }
 }
