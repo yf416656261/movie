@@ -29,6 +29,7 @@ public class Login extends Activity {
 
 	public static User user = null;
 	public static ArrayList<Movie> movie_list = new ArrayList<Movie>();
+	public static ArrayList<Cinema> cinema_list = new ArrayList<Cinema>();
 	public final static String URL = "http://115.28.70.78/film";
 	HttpURLConnection connection = null;
 	DataOutputStream out;
@@ -85,6 +86,7 @@ public class Login extends Activity {
 								Log.w("lll", result);
 								Parse_User(result);
 								//LoadAllMovies();
+								//LoadAllCinema();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -186,7 +188,7 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					Parse_Movies(result, 0);
+					Parse_Movies(result);
 					
 					
 					Intent intent = new Intent(Login.this, MainTabsActivity.class);
@@ -205,7 +207,7 @@ public class Login extends Activity {
     	}).start();
     }
     
-    public static void Parse_Movies(String xml, int type) {
+    private void Parse_Movies(String xml) {
     	String title = "", comment = "";
 		int ID = 0, I_ID = 0;
     	try {
@@ -233,11 +235,8 @@ public class Login extends Activity {
 					}
 					if (parser.getName().equals("I_ID")) {
 						I_ID = Integer.parseInt(parser.nextText());
-						if (type == 0) {
-							movie_list.add(new Movie(title, comment, ID, I_ID));
-						} else {
-							FirstActivity.search_list.add(new Movie(title, comment, ID, I_ID));
-						}
+					    movie_list.add(new Movie(title, comment, ID, I_ID));
+						
 					}
 				case XmlPullParser.END_TAG:
 					if (parser.getName().equals("movies")) {
@@ -251,5 +250,13 @@ public class Login extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    }
+    
+    private void LoadAllCinema() {
+    	
+    }
+    
+    private void Parse_Cinema(String xml) {
+    	
     }
 }

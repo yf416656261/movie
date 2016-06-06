@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,20 +43,20 @@ public class FirstActivity extends Activity {
 	private ListView l;
 	private movieAdapter mAdapter;
 	
-	public static List<Movie> search_list = null;
+	/*public static List<Movie> search_list = null;
 	
 	EditText s_in;
 	Button search;
 	HttpURLConnection connection = null;
 	DataOutputStream out;
-	InputStream in;
+	InputStream in;*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first);
 		
-		s_in = (EditText)findViewById(R.id.search_in);
+		/*s_in = (EditText)findViewById(R.id.search_in);
 		search = (Button)findViewById(R.id.search);
 		
 		search.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +91,9 @@ public class FirstActivity extends Activity {
 								response.append(line);
 							}
 							result = response.toString();
+							Log.w("aaaaaa", result);
 							if (result.equals("")) {
-								Toast.makeText(FirstActivity.this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
+								//Toast.makeText(FirstActivity.this, "Œ¥À—À˜µΩ¥ÀµÁ”∞", Toast.LENGTH_SHORT).show();
 							} else {
 								search_list = new ArrayList<Movie>();
 								Login.Parse_Movies(result, 1);
@@ -109,15 +111,11 @@ public class FirstActivity extends Activity {
 				}).start();
 			}
 			
-		});
+		});*/
 		
 		
 		l = (ListView)findViewById(R.id.home_lv_forum);
-		if (search_list == null) {
-			mAdapter = new movieAdapter(this, Login.movie_list);
-		} else {
-			mAdapter = new movieAdapter(this, search_list);
-		}
+	    mAdapter = new movieAdapter(this, Login.movie_list);
 		l.setAdapter(mAdapter);
 	}
 	
