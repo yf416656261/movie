@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">movie</string>
+    <string name="app_name">不看电影</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_first">FirstActivity</string>
@@ -11,7 +11,7 @@
     <string name="person_info">我的</string>
     <string name="title_activity_ass">AssActivity</string>
     <string name="alerm_title">提醒</string>
-    <string name="alert_quit_confirm">确认退出影吧？</string>
+    <string name="alert_quit_confirm">确认退出不看电影？</string>
     <string name="alert_yes_button">确认</string>
     <string name="alert_no_button">取消</string>
     <string name="title_activity_content">ContentActivity</string>

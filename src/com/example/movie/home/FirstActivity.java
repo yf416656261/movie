@@ -187,7 +187,6 @@ public class FirstActivity extends Activity {
 					bundle.putString("MID", String.valueOf(movieList.get(position).getID()));
 					intent.putExtras(bundle);
 					startActivity(intent);
-					finish();
 				}
 				
 			});
