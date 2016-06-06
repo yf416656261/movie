@@ -85,7 +85,7 @@ public class Login extends Activity {
 								user = new User();
 								Log.w("lll", result);
 								Parse_User(result);
-								//LoadAllMovies();
+								LoadAllMovies();
 								//LoadAllCinema();
 							}
 						} catch (Exception e) {
@@ -99,10 +99,6 @@ public class Login extends Activity {
 					}
 					
 				}).start();
-				
-				Intent intent = new Intent(Login.this, MainTabsActivity.class);
-				startActivity(intent);
-				finish();
 			}
         	
         });
@@ -188,6 +184,7 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
+					Log.w("hehehe", result);
 					Parse_Movies(result);
 					
 					
@@ -208,8 +205,8 @@ public class Login extends Activity {
     }
     
     private void Parse_Movies(String xml) {
-    	String title = "", comment = "";
-		int ID = 0, I_ID = 0;
+    	String title = "", comment = "", I_ID = "";
+		int ID = 0;
     	try {
     		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 			XmlPullParser parser = factory.newPullParser();
@@ -222,7 +219,7 @@ public class Login extends Activity {
 						title = "";
 						comment = "";
 						ID = 0;
-						I_ID = 0;
+						I_ID = "";
 					}
 					if (parser.getName().equals("ID")) {
 						ID = Integer.parseInt(parser.nextText());
@@ -234,9 +231,9 @@ public class Login extends Activity {
 						comment = parser.nextText();
 					}
 					if (parser.getName().equals("I_ID")) {
-						I_ID = Integer.parseInt(parser.nextText());
+						I_ID = parser.nextText();
 					    movie_list.add(new Movie(title, comment, ID, I_ID));
-						
+						Log.w("title", title);
 					}
 				case XmlPullParser.END_TAG:
 					if (parser.getName().equals("movies")) {

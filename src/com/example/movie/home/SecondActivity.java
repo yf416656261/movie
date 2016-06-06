@@ -78,9 +78,9 @@ public class SecondActivity extends Activity {
 			if (convertView == null) {
 				cListView = new cinemaListView();
 				convertView = layoutInflater.inflate(R.layout.listview_cinema, null);
-				cListView.title = (TextView)findViewById(R.id.name_cinema);
-				cListView.address = (TextView)findViewById(R.id.address_cinema);
-				cListView.price = (TextView)findViewById(R.id.price_cinema);
+				cListView.title = (TextView)convertView.findViewById(R.id.name_cinema);
+				cListView.address = (TextView)convertView.findViewById(R.id.address_cinema);
+				cListView.price = (TextView)convertView.findViewById(R.id.price_cinema);
 				convertView.setTag(cListView);
 			} else {
 				cListView = (cinemaListView)convertView.getTag();

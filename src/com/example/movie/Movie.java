@@ -4,9 +4,9 @@ public class Movie {
     private String title;
 	private String comment;
 	private int ID;
-	private int imageID;
+	private String imageID;
 	public Movie() {}
-	public Movie(String title, String comment, int ID, int imageID) {
+	public Movie(String title, String comment, int ID, String imageID) {
 		this.title = title;
 		this.comment = comment;
 		this.ID = ID;
@@ -21,7 +21,7 @@ public class Movie {
 	public void setID(int ID) {
 		this.ID = ID;
 	}
-	public void setImageID(int imageID) {
+	public void setImageID(String imageID) {
 		this.imageID = imageID;
 	}
 	public String getTitle() {
@@ -33,7 +33,7 @@ public class Movie {
 	public int getID() {
 		return this.ID;
 	}
-	public int getImageID() {
+	public String getImageID() {
 		return this.imageID;
 	}
 }

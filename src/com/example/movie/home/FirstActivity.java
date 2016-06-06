@@ -3,6 +3,8 @@ package com.example.movie.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -159,16 +161,21 @@ public class FirstActivity extends Activity {
 			if (convertView == null) {
 				mListView = new movieListView();
 				convertView = layoutInflater.inflate(R.layout.listview, null);
-				mListView.title = (TextView)findViewById(R.id.listview_title);
-				mListView.content = (TextView)findViewById(R.id.listview_content);
-				mListView.imageID = (ImageView)findViewById(R.id.listview_image);
+				mListView.title = (TextView)convertView.findViewById(R.id.listview_title);
+				mListView.content = (TextView)convertView.findViewById(R.id.listview_content);
+				mListView.imageID = (ImageView)convertView.findViewById(R.id.listview_image);
 				convertView.setTag(mListView);
 			} else {
 				mListView = (movieListView)convertView.getTag();
 			}
 			mListView.title.setText((String)movieList.get(position).getTitle());
 			mListView.content.setText((String)movieList.get(position).getComment());
-			mListView.imageID.setImageResource(R.drawable.face);
+			String im = (String)movieList.get(position).getImageID();
+			Context ctx=getBaseContext();
+			int id = getResources().getIdentifier(im, "drawable", ctx.getPackageName());
+			mListView.imageID.setImageDrawable(getResources().getDrawable(id));
+			//Bitmap bm = BitmapFactory.decodeFile(file);
+			//mListView.imageID.setImageBitmap(bm);
 			//¶¯Ì¬Í¼Æ¬µ÷ÓÃ
 			l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
