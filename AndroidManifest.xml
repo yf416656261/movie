@@ -4,17 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="21" />
 
     <application
+        android:theme="@style/AppBaseTheme"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".Login"
-            android:label="@string/app_name" >
+            android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,34 +25,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainTabsActivity"
-            android:label="@string/app_name" >
+            android:name=".MainTabsActivity" >
         </activity>
         <activity
-            android:name=".home.FirstActivity"
-            android:label="@string/title_activity_first" >
+            android:name=".home.FirstActivity" >
         </activity>
         <activity
-            android:name=".home.SecondActivity"
-            android:label="@string/title_activity_second" >
+            android:name=".home.SecondActivity" >
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main_tabs" >
+            android:name=".MainActivity" >
         </activity>
         <activity
-            android:name=".AssActivity"
-            android:label="@string/title_activity_ass" >
-        </activity>
-        <activity
-            android:name=".ContentActivity"
-            android:label="@string/title_activity_content" >
+            android:name=".ContentActivity" >
         </activity>
         <activity android:name=".User_info" >
         </activity>
-        <activity
-            android:name=".Register"
-            android:label="@string/title_activity_register" >
+        <activity 
+            android:name=".Register" >
         </activity>
     </application>
 

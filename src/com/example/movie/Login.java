@@ -15,33 +15,39 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.movie.home.FirstActivity;
 
 public class Login extends Activity {
 
-	public static User user = new User();
+	public static User user = null;
 	public static ArrayList<Movie> movie_list = new ArrayList<Movie>();
-	public final static String URL = "http://115.28.70.78";
+	public static ArrayList<Cinema> cinema_list = new ArrayList<Cinema>();
+	public final static String URL = "http://115.28.70.78/film";
 	HttpURLConnection connection = null;
 	DataOutputStream out;
 	InputStream in;
-	EditText acc = (EditText)findViewById(R.id.account);
-	EditText pw = (EditText)findViewById(R.id.password);
-	Button login = (Button)findViewById(R.id.login_button);
-	Button register = (Button)findViewById(R.id.register_button);
+	EditText acc, pw;
+	Button login, register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         
+        acc = (EditText)findViewById(R.id.account_login);
+        pw = (EditText)findViewById(R.id.password_login);
+        login = (Button)findViewById(R.id.login_button);
+        register = (Button)findViewById(R.id.register_button);
         login.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -67,6 +73,7 @@ public class Login extends Activity {
 							out = new DataOutputStream(connection.getOutputStream());
 							out.writeBytes(query);
 							
+							
 							in = connection.getInputStream();
 							BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 							StringBuilder response = new StringBuilder();
@@ -75,11 +82,15 @@ public class Login extends Activity {
 								response.append(line);
 							}
 							result = response.toString();
+							Log.w("cccc", "00000");
 							if (result.equals("")) {
 								Toast.makeText(Login.this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
 							} else {
+								user = new User();
+								Log.w("lll", result);
 								Parse_User(result);
 								LoadAllMovies();
+								//LoadAllCinema();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -117,14 +128,23 @@ public class Login extends Activity {
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				switch (eventType) {
 				case XmlPullParser.START_TAG:
-					if (parser.getName().equals("ID")) {
-						user.setId(Integer.parseInt(parser.nextText()));
-					}
 					if (parser.getName().equals("PASSWORD")) {
 						user.setPassword(parser.nextText());
 					}
 					if (parser.getName().equals("NAME")) {
 						user.setName(parser.nextText());
+					}
+					if (parser.getName().equals("SEX")) {
+						user.setSex(parser.nextText());
+					}
+					if (parser.getName().equals("PHONE")) {
+						user.setPhone(parser.nextText());
+					}
+					if (parser.getName().equals("E_ADD")) {
+						user.setEmail_address(parser.nextText());
+					}
+					if (parser.getName().equals("ADD")) {
+						user.setAddress(parser.nextText());
 					}
 					if (parser.getName().equals("P_ID")) {
 						user.setPicture_id(Integer.parseInt(parser.nextText()));
@@ -168,7 +188,8 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					Parse_Movies(result, 0);
+					Log.w("hehehe", result);
+					Parse_Movies(result);
 					
 					
 					Intent intent = new Intent(Login.this, MainTabsActivity.class);
@@ -187,9 +208,9 @@ public class Login extends Activity {
     	}).start();
     }
     
-    public static void Parse_Movies(String xml, int type) {
-    	String title = "", comment = "";
-		int ID = 0, I_ID = 0;
+    private void Parse_Movies(String xml) {
+    	String title = "", comment = "", I_ID = "";
+		int ID = 0;
     	try {
     		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 			XmlPullParser parser = factory.newPullParser();
@@ -202,7 +223,7 @@ public class Login extends Activity {
 						title = "";
 						comment = "";
 						ID = 0;
-						I_ID = 0;
+						I_ID = "";
 					}
 					if (parser.getName().equals("ID")) {
 						ID = Integer.parseInt(parser.nextText());
@@ -214,12 +235,9 @@ public class Login extends Activity {
 						comment = parser.nextText();
 					}
 					if (parser.getName().equals("I_ID")) {
-						I_ID = Integer.parseInt(parser.nextText());
-						if (type == 0) {
-							movie_list.add(new Movie(title, comment, ID, I_ID));
-						} else {
-							FirstActivity.search_list.add(new Movie(title, comment, ID, I_ID));
-						}
+						I_ID = parser.nextText();
+					    movie_list.add(new Movie(title, comment, ID, I_ID));
+						Log.w("title", title);
 					}
 				case XmlPullParser.END_TAG:
 					if (parser.getName().equals("movies")) {
@@ -233,5 +251,13 @@ public class Login extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    }
+    
+    private void LoadAllCinema() {
+    	
+    }
+    
+    private void Parse_Cinema(String xml) {
+    	
     }
 }
