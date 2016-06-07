@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.movie.CinemMainActivity" >
+
+    <TextView
+        android:id="@+id/cinema_act_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textSize="8pt"
+        android:text="影院名" />
+
+    <TextView
+        android:id="@+id/cinema_act_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cinema_act_name"
+        android:layout_alignRight="@+id/cinema_act_name"
+        android:layout_below="@+id/cinema_act_name"
+        android:lines="2"
+        android:text="地址" />
+
+    <HorizontalListView.HorizontalListView
+        android:id="@+id/horizontal_listview"
+        android:layout_width="match_parent"
+        android:layout_height="143dip"
+        android:background="#edd1d8"
+        android:layout_below="@+id/cinema_act_address" >
+        
+    </HorizontalListView.HorizontalListView>
+
+    <TextView
+        android:id="@+id/cinema_act_mname"
+        android:paddingTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/horizontal_listview"
+        android:layout_centerVertical="true"
+        android:text="片名"
+        android:textSize="8pt" />
+
+</RelativeLayout>

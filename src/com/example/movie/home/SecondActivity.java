@@ -2,6 +2,7 @@ package com.example.movie.home;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.movie.Cinema;
+import com.example.movie.CinemaMainActivity;
 import com.example.movie.Login;
 
 public class SecondActivity extends Activity {
@@ -94,7 +96,12 @@ public class SecondActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					
+					Bundle bundle = new Bundle();
+					bundle.putString("name", cinemaList.get(arg2).getName());
+					bundle.putString("address", cinemaList.get(arg2).getAddress());
+					Intent intent = new Intent(SecondActivity.this, CinemaMainActivity.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
 				}
 			});
 			return convertView;

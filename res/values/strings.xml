@@ -16,5 +16,6 @@
     <string name="alert_no_button">取消</string>
     <string name="title_activity_content">ContentActivity</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_cinema_main">CinemaMainActivity</string>
 
 </resources>

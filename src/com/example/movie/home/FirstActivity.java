@@ -220,8 +220,8 @@ public class FirstActivity extends Activity {
 			
 			mListView.content.setText((String)movieList.get(position).getComment());
 			String im = (String)movieList.get(position).getImageID();
-			Context ctx=getBaseContext();
-			int id = getResources().getIdentifier(im, "drawable", ctx.getPackageName());
+			//Context ctx=getBaseContext();
+			int id = getResources().getIdentifier(im, "drawable", context.getPackageName());
 			mListView.imageID.setImageDrawable(getResources().getDrawable(id));
 			//Bitmap bm = BitmapFactory.decodeFile(file);
 			//mListView.imageID.setImageBitmap(bm);
