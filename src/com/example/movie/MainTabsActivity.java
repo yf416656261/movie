@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TabHost;
@@ -31,9 +30,7 @@ public class MainTabsActivity extends TabActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main_tabs);
-		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 
 		mTabHost = getTabHost();
 		initIntents();
@@ -44,7 +41,7 @@ public class MainTabsActivity extends TabActivity implements
 	
 	private void initIntents() {
 		mHomeIntent = new Intent(this, MainActivity.class);
-		mPersonIntent = new Intent(this, User_info.class);
+		mPersonIntent = new Intent(this, AssActivity.class);
 	}
 	
 	private void initTips() {

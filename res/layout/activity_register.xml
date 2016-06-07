@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,101 +6,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.yy.movie.register"
-    android:background="@drawable/register_bg">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center">
+    tools:context="com.example.movie.Register" >
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tableLayout">
-            <TableRow>
-                <TextView
-                    android:text="Nickname:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/name_register"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Password:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/password_register"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Sex:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/sex_register"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:hint="male/famale"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Phone:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/phone_register"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="E-mail:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/email_address"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Address:"
-                    android:textSize="20dip"/>
-                <EditText
-                    android:id="@+id/address_register"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
-            </TableRow>
-
-        </TableLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/linearLayout">
-        </LinearLayout>
-        <Button
-            android:id="@+id/register_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:textAllCaps="false"
-            android:layout_marginTop="100dp"
-            android:background="#B0C4DE"
-            android:textSize="16dp"/>
-    </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
 
 </RelativeLayout>

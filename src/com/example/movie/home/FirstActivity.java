@@ -3,10 +3,7 @@ package com.example.movie.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,21 +42,18 @@ public class FirstActivity extends Activity {
 	private ListView l;
 	private movieAdapter mAdapter;
 	
-	/*public static List<Movie> search_list = null;
+	public static List<Movie> search_list = null;
 	
-	EditText s_in;
-	Button search;
+	EditText s_in = (EditText)findViewById(R.id.search_in);
+	Button search = (Button)findViewById(R.id.search);
 	HttpURLConnection connection = null;
 	DataOutputStream out;
-	InputStream in;*/
+	InputStream in;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first);
-		
-		/*s_in = (EditText)findViewById(R.id.search_in);
-		search = (Button)findViewById(R.id.search);
 		
 		search.setOnClickListener(new View.OnClickListener() {
 
@@ -93,9 +87,8 @@ public class FirstActivity extends Activity {
 								response.append(line);
 							}
 							result = response.toString();
-							Log.w("aaaaaa", result);
 							if (result.equals("")) {
-								//Toast.makeText(FirstActivity.this, "未搜索到此电影", Toast.LENGTH_SHORT).show();
+								Toast.makeText(FirstActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
 							} else {
 								search_list = new ArrayList<Movie>();
 								Login.Parse_Movies(result, 1);
@@ -113,11 +106,15 @@ public class FirstActivity extends Activity {
 				}).start();
 			}
 			
-		});*/
+		});
 		
 		
 		l = (ListView)findViewById(R.id.home_lv_forum);
-	    mAdapter = new movieAdapter(this, Login.movie_list);
+		if (search_list == null) {
+			mAdapter = new movieAdapter(this, Login.movie_list);
+		} else {
+			mAdapter = new movieAdapter(this, search_list);
+		}
 		l.setAdapter(mAdapter);
 	}
 	
@@ -161,21 +158,16 @@ public class FirstActivity extends Activity {
 			if (convertView == null) {
 				mListView = new movieListView();
 				convertView = layoutInflater.inflate(R.layout.listview, null);
-				mListView.title = (TextView)convertView.findViewById(R.id.listview_title);
-				mListView.content = (TextView)convertView.findViewById(R.id.listview_content);
-				mListView.imageID = (ImageView)convertView.findViewById(R.id.listview_image);
+				mListView.title = (TextView)findViewById(R.id.listview_title);
+				mListView.content = (TextView)findViewById(R.id.listview_content);
+				mListView.imageID = (ImageView)findViewById(R.id.listview_image);
 				convertView.setTag(mListView);
 			} else {
 				mListView = (movieListView)convertView.getTag();
 			}
 			mListView.title.setText((String)movieList.get(position).getTitle());
 			mListView.content.setText((String)movieList.get(position).getComment());
-			String im = (String)movieList.get(position).getImageID();
-			Context ctx=getBaseContext();
-			int id = getResources().getIdentifier(im, "drawable", ctx.getPackageName());
-			mListView.imageID.setImageDrawable(getResources().getDrawable(id));
-			//Bitmap bm = BitmapFactory.decodeFile(file);
-			//mListView.imageID.setImageBitmap(bm);
+			mListView.imageID.setImageResource(R.drawable.face);
 			//动态图片调用
 			l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -187,6 +179,7 @@ public class FirstActivity extends Activity {
 					bundle.putString("MID", String.valueOf(movieList.get(position).getID()));
 					intent.putExtras(bundle);
 					startActivity(intent);
+					finish();
 				}
 				
 			});
