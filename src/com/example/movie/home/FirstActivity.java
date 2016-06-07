@@ -143,6 +143,9 @@ public class FirstActivity extends Activity {
 		
 		
 		l = (ListView)findViewById(R.id.home_lv_forum);
+		if (Login.movie_list.size() < 1) {
+			Log.w("fail", "movie");
+		}
 	    mAdapter = new movieAdapter(this, Login.movie_list);
 		l.setAdapter(mAdapter);
 	}

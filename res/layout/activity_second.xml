@@ -4,13 +4,6 @@
     android:layout_height="fill_parent"
     android:layout_weight="1.0" >
 
-    <ListView
-        android:id="@+id/home_lv_mark"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/backgroundcolor"
-        android:fadingEdge="none" />
-
     <ProgressBar
         android:id="@+id/home_progress_like"
         style="?android:attr/progressBarStyleInverse"
@@ -20,5 +13,23 @@
         android:indeterminateDrawable="@drawable/progressbar"
         android:visibility="visible"
         android:dividerHeight="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/home_lv_mark"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundcolor"
+            android:cacheColorHint="@color/backgroundcolor"
+            android:divider="@drawable/list_divider"
+            android:fadingEdge="none"
+            android:dividerHeight="10dp" >
+        </ListView>
+
+    </LinearLayout>
 
 </FrameLayout>

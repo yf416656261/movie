@@ -87,7 +87,7 @@ public class SecondActivity extends Activity {
 			}
 			cListView.title.setText((String)cinemaList.get(position).getName());
 			cListView.address.setText((String)cinemaList.get(position).getAddress());
-			cListView.price.setText(String.valueOf(cinemaList.get(position).getPrice()));
+			cListView.price.setText(String.valueOf(cinemaList.get(position).getPrice()) + "ÔªÆð");
 			
 			l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -97,7 +97,7 @@ public class SecondActivity extends Activity {
 					
 				}
 			});
-			return null;
+			return convertView;
 		}
 		
 	}

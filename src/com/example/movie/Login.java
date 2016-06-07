@@ -84,13 +84,16 @@ public class Login extends Activity {
 							result = response.toString();
 							Log.w("cccc", "00000");
 							if (result.equals("")) {
-								Toast.makeText(Login.this, "�˺Ż��������", Toast.LENGTH_SHORT).show();
+								Toast.makeText(Login.this, "锟剿号伙拷锟斤拷锟斤拷锟斤拷锟�", Toast.LENGTH_SHORT).show();
 							} else {
 								user = new User();
 								Log.w("lll", result);
 								Parse_User(result);
 								LoadAllMovies();
-								LoadAllCinema();
+								
+								Intent intent = new Intent(Login.this, MainTabsActivity.class);
+								startActivity(intent);
+								finish();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -188,9 +191,9 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					//Log.w("hehehe", result);
+					Log.w("moviessss", result);
 					Parse_Movies(result);
-					
+					LoadAllCinema();
 					
 					/*Intent intent = new Intent(Login.this, MainTabsActivity.class);
 					startActivity(intent);
@@ -254,7 +257,7 @@ public class Login extends Activity {
     }
 
 	private void LoadAllCinema() {
-		movie_list.clear();
+		cinema_list.clear();
 		final String url = URL + "/querycinema";
 		new Thread(new Runnable() {
 
@@ -280,13 +283,10 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					Log.w("hehehe", result);
+					//Log.w("hehehe", result);
 					Parse_Cinema(result);
 //
 //
-					Intent intent = new Intent(Login.this, MainTabsActivity.class);
-					startActivity(intent);
-					finish();
 				} catch (Exception e) {
 					e.printStackTrace();
 					result = "";

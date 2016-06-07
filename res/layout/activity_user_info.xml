@@ -11,46 +11,51 @@
         android:background="@drawable/user_info_bg"
         android:orientation="vertical" android:layout_weight="0.34">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginTop="20dip">
+            android:layout_marginTop="20dip" >
+
             <FrameLayout
+                android:id="@+id/frameLayout1"
                 android:layout_width="60.0dip"
                 android:layout_height="60.0dip"
-                android:layout_marginLeft="15dip">
+                android:layout_marginLeft="15dip" >
+
                 <ImageView
                     android:id="@+id/userface"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:src="@drawable/face" />
+
                 <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:src="@drawable/portrait_round" />
             </FrameLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
                 android:layout_marginTop="1dip"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-                <TextView
-                    android:id="@+id/info_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:layout_marginTop="1dip"
-                    android:textSize="20sp"
-                    android:text="我的昵称"/>
-
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/frameLayout1"
+                android:text="我的昵称"
+                android:textColor="#ffffff"
+                android:paddingLeft="7dp"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
-        </LinearLayout>
         <!-- 简介 -->
         <LinearLayout
             android:orientation="horizontal"
