@@ -84,13 +84,13 @@ public class Login extends Activity {
 							result = response.toString();
 							Log.w("cccc", "00000");
 							if (result.equals("")) {
-								Toast.makeText(Login.this, "ÕËºÅ»òÃÜÂë´íÎó", Toast.LENGTH_SHORT).show();
+								Toast.makeText(Login.this, "ï¿½ËºÅ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 							} else {
 								user = new User();
 								Log.w("lll", result);
 								Parse_User(result);
 								LoadAllMovies();
-								//LoadAllCinema();
+								LoadAllCinema();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -188,13 +188,13 @@ public class Login extends Activity {
 						response.append(line);
 					}
 					result = response.toString();
-					Log.w("hehehe", result);
+					//Log.w("hehehe", result);
 					Parse_Movies(result);
 					
 					
-					Intent intent = new Intent(Login.this, MainTabsActivity.class);
+					/*Intent intent = new Intent(Login.this, MainTabsActivity.class);
 					startActivity(intent);
-					finish();
+					finish();*/
 				} catch (Exception e) {
 					e.printStackTrace();
 					result = "";
@@ -252,12 +252,92 @@ public class Login extends Activity {
 			e.printStackTrace();
 		}
     }
-    
-    private void LoadAllCinema() {
-    	
-    }
+
+	private void LoadAllCinema() {
+		movie_list.clear();
+		final String url = URL + "/querycinema";
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String result = "";
+				try {
+					connection = (HttpURLConnection)((new URL(url).openConnection()));
+					connection.setRequestMethod("POST");
+					connection.setConnectTimeout(40000);
+					connection.setReadTimeout(40000);
+
+					out  = new DataOutputStream(connection.getOutputStream());
+					//out.writeBytes("mobileCode="+ phone_number.getText().toString() + "&userID=");
+					out.writeBytes("getAllCinemas");
+
+					in = connection.getInputStream();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+					StringBuilder response = new StringBuilder();
+					String line;
+					while ((line = reader.readLine()) != null) {
+						response.append(line);
+					}
+					result = response.toString();
+					Log.w("hehehe", result);
+					Parse_Cinema(result);
+//
+//
+					Intent intent = new Intent(Login.this, MainTabsActivity.class);
+					startActivity(intent);
+					finish();
+				} catch (Exception e) {
+					e.printStackTrace();
+					result = "";
+				} finally {
+					if (connection != null) {
+						connection.disconnect();
+					}
+				}
+			}
+
+		}).start();
+	}
     
     private void Parse_Cinema(String xml) {
-    	
+		String title = "", address = "";
+		int price = 0;
+		try {
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+			XmlPullParser parser = factory.newPullParser();
+			parser.setInput(new StringReader(xml));
+			int eventType = parser.getEventType();
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				switch (eventType) {
+					case XmlPullParser.START_TAG:
+						if (parser.getName().equals("Cinema")) {
+							title = "";
+							address = "";
+							price = 0;
+						}
+						if (parser.getName().equals("NAME")) {
+							title = parser.nextText();
+						}
+						if (parser.getName().equals("ADDRESS")) {
+							address = parser.nextText();
+						}
+						if (parser.getName().equals("PRICE")) {
+							price = Integer.parseInt(parser.nextText());
+							cinema_list.add(new Cinema(title, address, price));
+							Log.w("title", title);
+						}
+					case XmlPullParser.END_TAG:
+						if (parser.getName().equals("Cinema")) {
+						}
+						break;
+					default:
+						break;
+				}
+				eventType = parser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 }
