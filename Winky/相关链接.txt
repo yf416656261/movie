@@ -1,0 +1,6 @@
+https://github.com/afollestad/material-dialogs  （一些material组件）
+
+https://drakeet.me/android-studio
+
+
+https://drakeet.me/material-design-settings-activity#more-790  （设置界面）
